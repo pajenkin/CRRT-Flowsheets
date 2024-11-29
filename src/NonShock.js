@@ -1,3 +1,4 @@
+
 export function calculateNonShockProtocol(weight, albumin){
     const NonShockTable = [
         {weight: 50, BFR: 80, ACDA: 200, DFR: 500, RFR: 500}, 
@@ -26,7 +27,7 @@ export function calculateNonShockProtocol(weight, albumin){
         {effluent: 4100, CalciumDose: [48,50,52,54,56,57,59,61,63,64] },
         {effluent: 4400, CalciumDose: [51,53,55,57,59,61,63,65,67,68] },
         {effluent: 4700, CalciumDose: [54,56,58,60,63,65,67,69,71,73] }
-      ]
+    ]
 
     const ptWeight = weight;
     const ptAlbumin = albumin;
@@ -47,12 +48,12 @@ export function calculateNonShockProtocol(weight, albumin){
         if (checkWeightValid(weight) === true) {
             if (weight >= 150){
                 ptParams = NonShockTable.filter(function(wt){return wt.weight >= 150});
-              } else if (weight <= 50){
-                  ptParams = NonShockTable.filter(function(wt){return wt.weight <= 50});
-              } else {
-                  weight = Math.ceil(weight/10)*10;
-                  ptParams = NonShockTable.filter(function(wt){return wt.weight === weight });
-              };
+            } else if (weight <= 50){
+                ptParams = NonShockTable.filter(function(wt){return wt.weight <= 50});
+            } else {
+                weight = Math.ceil(weight/10)*10;
+                ptParams = NonShockTable.filter(function(wt){return wt.weight === weight });
+            };
         } else {
             return undefined;
         }

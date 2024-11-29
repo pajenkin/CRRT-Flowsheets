@@ -3,5 +3,13 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "target": "ES5", 
+    "module": "CommonJS",
+    "sourceMap": true,
+    "allowJs": true,
+    "esModuleInterop": true
+  }, 
+  "include": ["src/index.d.ts"]
 }

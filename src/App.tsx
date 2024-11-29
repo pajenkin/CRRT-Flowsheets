@@ -1,13 +1,11 @@
-import React from 'react'
+//import React from 'react'
 import Select from 'react-select'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import './Shock.js';
 import './NonShock.js';
-import {calculateNonShockProtocol} from './NonShock.js';
-import {calculateShockProtocol} from './Shock.js';
+import * as calculateNonShockProtocol from './NonShock.js';
+import * as calculateShockProtocol from './Shock.js';
 
 const ProtocolSelections = [
   {value:'1', label: 'Non-Shock'},
@@ -47,7 +45,7 @@ const ProtocolSelections = [
 function App() {
 
   let PatientReturnParams = [];
-  
+
     //initialize variables
     const [ ProtocolType, setProtocolType] = useState(0);
     const [ PatientWeight, setPatientWeight] = useState(0);
