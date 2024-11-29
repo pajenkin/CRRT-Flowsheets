@@ -18,7 +18,7 @@ let ProtocolType;
 let PatientWeight;
 let PatientCalcium;
 let PatientAlbumin;
-let PatientReturnParams = {weight: ' ', BFR: ' ', ACDA: ' ', DFR: ' ', RFR: ' ', calciumDose: ' '};
+let PatientReturnParams = {weight: 0, BFR: 0, ACDA: 0, DFR: 0, RFR: 0, calciumDose: 0};
 
 // return params for Shock and Non-shock from the respected .JS sheets
 // function calculateNonShockProtocol(weight, albumin);
@@ -105,7 +105,6 @@ function App() {
     } else {
       return false;
     };
-    TestFunction();
   };
 
   function youMayProceed(){
@@ -135,7 +134,6 @@ function App() {
     console.log("Sumbit Clicked");
     youMayProceed();
     PatientReturnParams = PatientReturnParams[0];
-    console.log(PatientReturnParams);
     ChangeAllVariables();
   };
 
