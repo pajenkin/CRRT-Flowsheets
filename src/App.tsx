@@ -18,15 +18,15 @@ const ProtocolSelections = [
 // let PatientWeight;
 // let PatientCalcium;
 // let PatientAlbumin;
-let PatientReturnParams: {
-  weight: number;
-  BFR: number;
-  ACDA: number;
-  DFR: number;
-  RFR: number;
-  calciumDose: number;
-  effluent: number;
-};
+// let PatientReturnParams: number {
+//   weight: number;
+//   BFR: number;
+//   ACDA: number;
+//   DFR: number;
+//   RFR: number;
+//   calciumDose: number;
+//   effluent: number;
+// };
 
 // return params for Shock and Non-shock from the respected .JS sheets
 // function calculateNonShockProtocol(weight, albumin);
@@ -45,6 +45,9 @@ let PatientReturnParams: {
 
 
 function App() {
+
+  let PatientReturnParams = [];
+  
     //initialize variables
     const [ ProtocolType, setProtocolType] = useState(0);
     const [ PatientWeight, setPatientWeight] = useState(0);
@@ -55,6 +58,7 @@ function App() {
     const [ PatientRFR, setPatientRFR] = useState(0);
     const [ PatientCaDose, setPatientCaDose] = useState(0);
     const [ PatientEffluent, setPatientEffluent] = useState(0);
+ 
 
   // Set protocol Type: Shock/Non-Shock
   function defineProtocolType (e) {
