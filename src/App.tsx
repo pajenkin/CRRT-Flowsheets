@@ -19,13 +19,14 @@ let PatientWeight;
 let PatientCalcium;
 let PatientAlbumin;
 let PatientReturnParams: {
-  weight: number;
-  BFR: number;
-  ACDA: number;
-  DFR: number;
-  RFR: number;
-  calciumDose: number;
-}
+  weight: 0;
+  BFR: 0;
+  ACDA: 0;
+  DFR: 0;
+  RFR: 0;
+  calciumDose: 0;
+  effluent: 0;
+};
 
 // return params for Shock and Non-shock from the respected .JS sheets
 // function calculateNonShockProtocol(weight, albumin);
@@ -54,9 +55,6 @@ function App() {
     const [ PatientRFR, setPatientRFR] = useState();
     const [ PatientCaDose, setPatientCaDose] = useState();
     const [ PatientEffluent, setPatientEffluent] = useState();
-
-
-  const [count, setCount] = useState(0);
 
   // Set protocol Type: Shock/Non-Shock
   function defineProtocolType (e) {
@@ -140,7 +138,7 @@ function App() {
   function handleOnClick (){
     console.log("Sumbit Clicked");
     youMayProceed();
-    PatientReturnParams = PatientReturnParams[0 as unknown as keyof typeof PatientReturnParams];
+    PatientReturnParams = Object.values(PatientReturnParams)[0];
     ChangeAllVariables();
   };
 
