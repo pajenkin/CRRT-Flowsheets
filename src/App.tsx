@@ -14,18 +14,18 @@ const ProtocolSelections = [
   {value:'2', label: 'Shock'}
 ];
 
-let ProtocolType;
-let PatientWeight;
-let PatientCalcium;
-let PatientAlbumin;
+// let ProtocolType;
+// let PatientWeight;
+// let PatientCalcium;
+// let PatientAlbumin;
 let PatientReturnParams: {
-  weight: 0;
-  BFR: 0;
-  ACDA: 0;
-  DFR: 0;
-  RFR: 0;
-  calciumDose: 0;
-  effluent: 0;
+  weight: number;
+  BFR: number;
+  ACDA: number;
+  DFR: number;
+  RFR: number;
+  calciumDose: number;
+  effluent: number;
 };
 
 // return params for Shock and Non-shock from the respected .JS sheets
@@ -46,15 +46,15 @@ let PatientReturnParams: {
 
 function App() {
     //initialize variables
-    const [ ProtocolType, setProtocolType] = useState();
-    const [ PatientWeight, setPatientWeight] = useState();
-    const [ PatientAlbumin, setPatientAlbumin] = useState();
-    const [ PatientBFR, setPatientBFR] = useState();
-    const [ PatientACDA, setPatientACDA] = useState();
-    const [ PatientDFR, setPatientDFR] = useState();
-    const [ PatientRFR, setPatientRFR] = useState();
-    const [ PatientCaDose, setPatientCaDose] = useState();
-    const [ PatientEffluent, setPatientEffluent] = useState();
+    const [ ProtocolType, setProtocolType] = useState(0);
+    const [ PatientWeight, setPatientWeight] = useState(0);
+    const [ PatientAlbumin, setPatientAlbumin] = useState(0);
+    const [ PatientBFR, setPatientBFR] = useState(0);
+    const [ PatientACDA, setPatientACDA] = useState(0);
+    const [ PatientDFR, setPatientDFR] = useState(0);
+    const [ PatientRFR, setPatientRFR] = useState(0);
+    const [ PatientCaDose, setPatientCaDose] = useState(0);
+    const [ PatientEffluent, setPatientEffluent] = useState(0);
 
   // Set protocol Type: Shock/Non-Shock
   function defineProtocolType (e) {
@@ -180,7 +180,7 @@ function App() {
       <div> 
         <button onClick={handleOnClick}>Submit</button>
       </div>
-      <p className="read-the-docs">
+      <div className="read-the-docs">
         <div>
             <h2>Results:</h2>
             <div>
@@ -195,7 +195,7 @@ function App() {
         <div>
           There will be other considerations about HCT, uneven flows and such below. 
         </div>
-      </p> 
+      </div> 
     </>
   )
 }
