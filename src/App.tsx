@@ -27,22 +27,6 @@ const ProtocolSelections = [
 //   effluent: number;
 // };
 
-// return params for Shock and Non-shock from the respected .JS sheets
-// function calculateNonShockProtocol(weight, albumin);
-// function calculateShockProtocol(weight, albumin);
-
-// function definePatientCalcium (e){
-//   let calcium = e.target.value;
-//   console.log(calcium);
-//   if (calcium >= 0.70 && calcium <= 1.4){
-//     console.log("calcium check ok");
-//     let PatientCalcium = calcium;
-//   } else {
-//     console.log("patient calcium not right")
-//   };
-// }; 
-
-
 function App() {
 
   let PatientReturnParams = [];
@@ -62,14 +46,12 @@ function App() {
   // Set protocol Type: Shock/Non-Shock
   function defineProtocolType (e: React.ChangeEvent<HTMLInputElement>) {
     setProtocolType(parseInt(e.value));
-    console.log(ProtocolType);
   };
 
   function definePatientWeight (e: React.ChangeEvent<HTMLInputElement>){
     let weight = parseInt(e.target.value);
-    console.log(weight);
     if (weight >= 20 && weight <= 150){
-      console.log("weight check ok");
+      //console.log("weight check ok");
       setPatientWeight(weight);
     } else {
       console.log("patient weight not right")
@@ -80,7 +62,7 @@ function App() {
     let albumin = parseInt(e.target.value);
     console.log(albumin);
     if (albumin >=1.0 && albumin <= 5.0){
-      console.log ("albumin check is ok");
+      //console.log ("albumin check is ok");
       setPatientAlbumin(albumin);
     } else {
       console.log("Patient albumin not right");
@@ -139,7 +121,6 @@ function App() {
   }
   
   function handleOnClick (){
-    console.log("Sumbit Clicked");
     youMayProceed();
     PatientReturnParams = Object.values(PatientReturnParams)[0];
     ChangeAllVariables();
