@@ -13,20 +13,6 @@ const ProtocolSelections = [
   {value:'2', label: 'Shock'}
 ];
 
-// let ProtocolType;
-// let PatientWeight;
-// let PatientCalcium;
-// let PatientAlbumin;
-// let PatientReturnParams: number {
-//   weight: number;
-//   BFR: number;
-//   ACDA: number;
-//   DFR: number;
-//   RFR: number;
-//   calciumDose: number;
-//   effluent: number;
-// };
-
 function App() {
 
   let PatientReturnParams = [];
@@ -41,6 +27,7 @@ function App() {
     const [ PatientRFR, setPatientRFR] = useState(0);
     const [ PatientCaDose, setPatientCaDose] = useState(0);
     const [ PatientEffluent, setPatientEffluent] = useState(0);
+    const [ InputError, setInputError] = useState(' ');
  
 
   // Set protocol Type: Shock/Non-Shock
@@ -52,8 +39,10 @@ function App() {
     let weight = parseInt(e.target.value);
     if (weight >= 20 && weight <= 150){
       //console.log("weight check ok");
+      sendInputError("");
       setPatientWeight(weight);
     } else {
+      sendInputError("Weight not within range");
       console.log("patient weight not right")
     };
   };
@@ -63,8 +52,10 @@ function App() {
     console.log(albumin);
     if (albumin >=1.0 && albumin <= 5.0){
       //console.log ("albumin check is ok");
+      sendInputError("");
       setPatientAlbumin(albumin);
     } else {
+      sendInputError("Albumin not within range");
       console.log("Patient albumin not right");
     }
   
@@ -73,9 +64,11 @@ function App() {
   //Check Weight as a variable
   function checkPatientWeight(){
       if (PatientWeight >= 20 && PatientWeight <= 300) {
+          sendInputError("");
           return true;
       } else {
-          return false;
+        sendInputError("Weight not within range");
+        return false;
       }
   };
 
@@ -84,6 +77,7 @@ function App() {
       if (PatientAlbumin >=1.0 && PatientAlbumin <= 5.0) {
           return true;
       } else {
+          sendInputError("Albumin not within range");
           return false;
       }
   };
@@ -126,6 +120,16 @@ function App() {
     ChangeAllVariables();
   };
 
+  function sendInputError (message){
+    if(message == ""){
+      console.log("Error: " + message);
+      setInputError("");
+    } else {
+      console.log("Error: " + message);
+      setInputError("Error: " + message);
+    };
+  };
+
   return (
     <>
       <div>
@@ -151,7 +155,7 @@ function App() {
       </div> */}
       <div className="ProtocolType">
         <h1>Select Protocol Type</h1>
-        <Select options={ProtocolSelections} onChange={defineProtocolType}/>
+        <Select options={ProtocolSelections} onChange={defineProtocolType}/><br></br>
       </div>
       <div className="PatientWeight">
         <h1>Input Patient Weight</h1>
@@ -165,6 +169,9 @@ function App() {
         <button onClick={handleOnClick}>Submit</button>
       </div>
       <div className="read-the-docs">
+        <div>
+          <h2>{InputError}</h2>
+        </div>
         <div>
             <h2>Results:</h2>
             <div>

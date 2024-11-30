@@ -11,32 +11,7 @@ const ProtocolSelections = [
     { value: '1', label: 'Non-Shock' },
     { value: '2', label: 'Shock' }
 ];
-// let ProtocolType;
-// let PatientWeight;
-// let PatientCalcium;
-// let PatientAlbumin;
-// let PatientReturnParams: number {
-//   weight: number;
-//   BFR: number;
-//   ACDA: number;
-//   DFR: number;
-//   RFR: number;
-//   calciumDose: number;
-//   effluent: number;
-// };
-// return params for Shock and Non-shock from the respected .JS sheets
-// function calculateNonShockProtocol(weight, albumin);
-// function calculateShockProtocol(weight, albumin);
-// function definePatientCalcium (e){
-//   let calcium = e.target.value;
-//   console.log(calcium);
-//   if (calcium >= 0.70 && calcium <= 1.4){
-//     console.log("calcium check ok");
-//     let PatientCalcium = calcium;
-//   } else {
-//     console.log("patient calcium not right")
-//   };
-// }; 
+
 function App() {
     let PatientReturnParams = [];
     //initialize variables
