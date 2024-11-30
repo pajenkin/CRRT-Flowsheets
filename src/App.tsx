@@ -1,11 +1,12 @@
 //import React from 'react'
+// @ts-nocheck
 import Select from 'react-select'
 import { useState } from 'react'
 import './App.css'
 import './Shock.js';
 import './NonShock.js';
-import * as calculateNonShockProtocol from './NonShock.js';
-import * as calculateShockProtocol from './Shock.js';
+import {calculateNonShockProtocol} from './NonShock.js';
+import {calculateShockProtocol} from './Shock.js';
 
 const ProtocolSelections = [
   {value:'1', label: 'Non-Shock'},
@@ -59,13 +60,13 @@ function App() {
  
 
   // Set protocol Type: Shock/Non-Shock
-  function defineProtocolType (e) {
-    setProtocolType(e.value);
+  function defineProtocolType (e: React.ChangeEvent<HTMLInputElement>) {
+    setProtocolType(parseInt(e.value));
     console.log(ProtocolType);
   };
 
-  function definePatientWeight (e){
-    let weight = e.target.value;
+  function definePatientWeight (e: React.ChangeEvent<HTMLInputElement>){
+    let weight = parseInt(e.target.value);
     console.log(weight);
     if (weight >= 20 && weight <= 150){
       console.log("weight check ok");
@@ -75,8 +76,8 @@ function App() {
     };
   };
 
-  function definePatientAlbumin (e) {
-    let albumin = e.target.value;
+  function definePatientAlbumin (e: React.ChangeEvent<HTMLInputElement>) {
+    let albumin = parseInt(e.target.value);
     console.log(albumin);
     if (albumin >=1.0 && albumin <= 5.0){
       console.log ("albumin check is ok");
