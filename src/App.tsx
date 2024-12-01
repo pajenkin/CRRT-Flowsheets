@@ -1,8 +1,9 @@
 //import React from 'react'
-// @ts-nocheck
-import Select from 'react-select'
-import { useState } from 'react'
-import './App.css'
+// @ts-nocheck --> Keep to ignore typescript typing errors. KEEP I PROMISE. 
+import Select from 'react-select';
+import { useState } from 'react';
+import {Logo} from './Logo.jsx';
+import './App.css';
 import './Shock.js';
 import './NonShock.js';
 import {calculateNonShockProtocol} from './NonShock.js';
@@ -133,58 +134,55 @@ function App() {
   return (
     <>
       <div>
-          {/* <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a> */}
-                <div>
-        <h1>University of Michigan CRRT Flows Check</h1>
-        <h2>This is the brief web application to check your CRRT prescription at University of Michigan</h2>
-      </div>
-      </div>
-      {/* <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div> */}
-      <div className="ProtocolType">
-        <h1>Select Protocol Type</h1>
-        <Select options={ProtocolSelections} onChange={defineProtocolType}/><br></br>
-      </div>
-      <div className="PatientWeight">
-        <h1>Input Patient Weight</h1>
-        <input type="number"  placeholder="Patient Weight" onChange={definePatientWeight} /> kg
-      </div>
-      <div className="PatientAlbumin">
-        <h1>Input Patient Albumin</h1>
-        <input type="number" placeholder="1-5"  onChange={definePatientAlbumin}/> g/dL
-      </div>
-      <div> 
-        <button onClick={handleOnClick}>Submit</button>
-      </div>
-      <div className="read-the-docs">
-        <div>
-          <h2>{InputError}</h2>
-        </div>
-        <div>
-            <h2>Results:</h2>
-            <div>
-              BFR:  {PatientBFR} <br></br>
-              ACDA: {PatientACDA} <br></br>
-              DFR:  {PatientDFR} <br></br>
-              RFR:  {PatientRFR}<br></br>
-              Total Effluent: {PatientEffluent} (BFR + ACDA + DFR + RFR + 100 UF)<br></br>
-              Calcium Infusion Rate:  {PatientCaDose} <br></br>
+        <header className="header">
+          <div className="header-container">
+            <Logo />
+            <div className="header-logo-words">
+              <h3>Nephrology</h3>
             </div>
-        </div>
+          </div>
+        </header>
         <div>
-          There will be other considerations about HCT, uneven flows and such below. 
+          <h1>University of Michigan CRRT Flows Check</h1>
+          <h2>This is the brief web application to check your CRRT prescription at University of Michigan</h2>
+        </div>
+      </div>
+      <div className="totalWrapper">
+        <div className="selectionWrapper ProtocolType">
+          <h3>Select Protocol Type</h3>
+          <Select options={ProtocolSelections} onChange={defineProtocolType}/><br></br>
+        </div>
+        <div className="PatientWeight">
+          <h3>Input Patient Weight</h3>
+          <input type="number"  placeholder="Patient Weight" onChange={definePatientWeight} /> kg
+        </div>
+        <div className="PatientAlbumin">
+          <h3>Input Patient Albumin</h3>
+          <input type="number" placeholder="1-5"  onChange={definePatientAlbumin}/> g/dL
+        </div>
+        <div> 
+          <button onClick={handleOnClick}>Submit</button>
+        </div>
+        <div className="read-the-docs">
+          <div>
+            <h2>{InputError}</h2>
+          </div>
+          <div>
+              <h2>Results:</h2>
+              <div>
+                BFR:  {PatientBFR} <br></br>
+                ACDA: {PatientACDA} <br></br>
+                DFR:  {PatientDFR} <br></br>
+                RFR:  {PatientRFR}<br></br>
+                Total Effluent: {PatientEffluent} (BFR + ACDA + DFR + RFR + 100 UF)<br></br>
+                Calcium Infusion Rate:  {PatientCaDose} <br></br>
+              </div>
+          </div>
+          <br></br>
+          <br></br>
+          <div>
+            There will be other considerations about HCT, uneven flows and such below. 
+          </div>
         </div>
       </div> 
     </>
