@@ -3,10 +3,10 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import Select from 'react-select';
 import { useState } from 'react';
 import './App.css';
-import './Shock.js';
-import './NonShock.js';
-import * as calculateNonShockProtocol from './NonShock.js';
-import * as calculateShockProtocol from './Shock.js';
+import './protocols/Shock.js';
+import './protocols/NonShock.js';
+import * as calculateNonShockProtocol from './protocols/NonShock.js';
+import * as calculateShockProtocol from './protocols/Shock.js';
 const ProtocolSelections = [
     { value: '1', label: 'Non-Shock' },
     { value: '2', label: 'Shock' }
