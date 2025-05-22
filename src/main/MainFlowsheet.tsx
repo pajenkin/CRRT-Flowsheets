@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Select from 'react-select';
-import Header from '../components/Header';
 import { ProtocolResult } from '../types/ProtocolResult';
 import { getCalculatedResult } from '../utils/protocolHelpers';
 
