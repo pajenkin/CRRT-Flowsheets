@@ -21,7 +21,7 @@ describe('findAlbuminIndex', () => {
     expect(findAlbuminIndex(1.3)).toBe(2);
   });
 
-  it('returns bin 3 for albumin = 1.9', () => {
+  it('returns bin 3 for albumin = 1.92645', () => {
     expect(findAlbuminIndex(1.9)).toBe(3);
   });
 

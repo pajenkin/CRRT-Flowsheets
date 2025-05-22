@@ -81,6 +81,7 @@ export default function MainFlowsheet() {
             <label className="block mb-2 font-medium">Patient Albumin (g/dL)</label>
             <input
               type="number"
+              step="any"
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Enter albumin in g/dL"
               onChange={(e) => setAlbumin(parseFloat(e.target.value))}
