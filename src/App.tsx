@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { useState } from 'react';
 import {Logo} from './Logo.jsx';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import MainFlowsheet from './main/MainFlowsheet';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/hyponatremia" element={<HyponatremiaPage />} />
         <Route path="/future" element={<FutureThoughtsPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
