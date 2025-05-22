@@ -91,6 +91,27 @@ Unless you're actively customizing ESLint, you don't need to worry about this no
 ## ✅ Next Priorities
 
 - [ ] UI polish and Tailwind layout refinement
+- [ ] Card-style result layout for outputs
+- [ ] Add result export/share/download
+- [ ] Add toggle to compare shock vs non-shock side-by-side
+- [ ] Optional admin panel for editing tables?
+
+### 🔜 Planned Pages
+
+- `/` – Main CRRT Calculator
+- `/about` – About the Creators / Shock-Liver Protocol Background
+- `/hyponatremia` – CRRT Considerations for Hyponatremia
+- `/future` – Future Thoughts and Expansion Ideas
+
+
+- [ ] UI polish and Tailwind layout refinement
+- [ ] Card-style result layout for outputs
+- [ ] Add result export/share/download
+- [ ] Add toggle to compare shock vs non-shock side-by-side
+- [ ] Optional admin panel for editing tables?
+
+
+- [ ] UI polish and Tailwind layout refinement
 - [ ] Add result export/share/download
 - [ ] Add toggle to compare shock vs non-shock side-by-side
 - [ ] Optional admin panel for editing tables?

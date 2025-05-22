@@ -6,8 +6,10 @@ import {Logo} from './Logo.jsx';
 import Header from './components/Header';
 import MainFlowsheet from './main/MainFlowsheet';
 import './App.css';
-// import './Shock.js';
-// import './NonShock.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AboutPage from './pages/AboutPage';
+import HyponatremiaPage from './pages/HyponatremiaPage';
+import FutureThoughtsPage from './pages/FutureThoughtsPage';
 
 const ProtocolSelections = [
   {value:'1', label: 'Non-Shock'},
@@ -16,12 +18,16 @@ const ProtocolSelections = [
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-    <Header />
-    <MainFlowsheet />
-  </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainFlowsheet />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/hyponatremia" element={<HyponatremiaPage />} />
+        <Route path="/future" element={<FutureThoughtsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App
-
+export default App;

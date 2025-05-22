@@ -1,5 +1,6 @@
+// src/components/Header.tsx
 import React from 'react';
-import { Link } from 'react-router-dom'; // Optional: if using React Router
+import { Link } from 'react-router-dom';
 import BlockMHex from '../assets/BlockMHex.svg';
 
 const Header: React.FC = () => {
@@ -12,17 +13,25 @@ const Header: React.FC = () => {
           alt="Logo" 
           className="h-10 w-auto sm:h-12"
         />
-        <span className="text-xl font-semibold text-gray-800">
-          CRRT Flowsheets
-        </span>
+        <Link to="/" className="text-xl font-semibold text-gray-800">
+          CRRT
+        </Link>
       </div>
 
       {/* Right: Nav tabs */}
       <nav className="hidden md:flex space-x-6 text-gray-700 text-sm font-medium">
-        <a href="/work-with-code" className="hover:text-blue-600 transition">
-          Work With Code
-        </a>
-        {/* Add more tabs here if needed */}
+        <Link to="/about" className="hover:text-blue-600 transition">
+          About
+        </Link>
+        <Link to="/" className="hover:text-blue-600 transition">
+          Calculator
+        </Link>
+        <Link to="/hyponatremia" className="hover:text-blue-600 transition">
+          Hyponatremia
+        </Link>
+        <Link to="/future" className="hover:text-blue-600 transition">
+          Future
+        </Link>
       </nav>
     </header>
   );

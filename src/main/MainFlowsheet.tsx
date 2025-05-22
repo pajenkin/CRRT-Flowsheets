@@ -1,164 +1,116 @@
-import { calculateShockProtocol, calculateNonShockProtocol } from '../protocols';
-import { getParamsForWeight, findEffluentIndex, findAlbuminIndex, roundTo } from '../utils';
-import { ProtocolResult } from '../types';
+// src/main/MainFlowsheet.tsx
 
-import Select from 'react-select';
 import { useState } from 'react';
+import Select from 'react-select';
+import Header from '../components/Header';
+import { ProtocolResult } from '../types/ProtocolResult';
+import { getCalculatedResult } from '../utils/protocolHelpers';
 
-import '../App.css';
-
-// Define the type for PatientReturnParams
-// type ProtocolResult = {
-//   BFR: number;
-//   DFR: number;
-//   ACDA: number;
-//   RFR: number;
-//   effluent: number;
-//   calciumDose: number;
-// };
-
-const ProtocolSelections = [
+const protocolOptions = [
   { value: '1', label: 'Non-Shock' },
   { value: '2', label: 'Shock' }
 ];
 
-const MainFlowsheet = () => {
-  const [ProtocolType, setProtocolType] = useState(0);
-  const [PatientWeight, setPatientWeight] = useState(0);
-  const [PatientAlbumin, setPatientAlbumin] = useState(0);
-  const [PatientBFR, setPatientBFR] = useState(0);
-  const [PatientACDA, setPatientACDA] = useState(0);
-  const [PatientDFR, setPatientDFR] = useState(0);
-  const [PatientRFR, setPatientRFR] = useState(0);
-  const [PatientCaDose, setPatientCaDose] = useState(0);
-  const [PatientEffluent, setPatientEffluent] = useState(0);
-  const [InputError, setInputError] = useState(' ');
-
-  let PatientReturnParams: ProtocolResult | null = null;
-
-  function defineProtocolType(e: any) {
-    setProtocolType(parseInt(e.value));
-  }
-
-  function definePatientWeight(e: React.ChangeEvent<HTMLInputElement>) {
-    const weight = parseInt(e.target.value);
-    if (weight >= 20 && weight <= 150) {
-      sendInputError("");
-      setPatientWeight(weight);
-    } else {
-      sendInputError("Weight not within range");
-    }
-  }
-
-  function definePatientAlbumin(e: React.ChangeEvent<HTMLInputElement>) {
-    const albumin = parseInt(e.target.value);
-    if (albumin >= 1.0 && albumin <= 5.0) {
-      sendInputError("");
-      setPatientAlbumin(albumin);
-    } else {
-      sendInputError("Albumin not within range");
-    }
-  }
-
-  function checkPatientWeight() {
-    if (PatientWeight >= 20 && PatientWeight <= 300) {
-      sendInputError("");
-      return true;
-    } else {
-      sendInputError("Weight not within range");
-      return false;
-    }
-  }
-
-  function checkPatientAlbumin() {
-    if (PatientAlbumin >= 1.0 && PatientAlbumin <= 5.0) {
-      return true;
-    } else {
-      sendInputError("Albumin not within range");
-      return false;
-    }
-  }
-
-  function ValidateVariables() {
-    return checkPatientWeight() && checkPatientAlbumin();
-  }
-
-  function youMayProceed() {
-    if (ProtocolType === 1 && ValidateVariables()) {
-      PatientReturnParams = calculateNonShockProtocol(PatientWeight, PatientAlbumin);
-    } else if (ProtocolType === 2 && ValidateVariables()) {
-      PatientReturnParams = calculateShockProtocol(PatientWeight, PatientAlbumin);
-    } else {
-      console.log("Not valid input");
-    }
-  }
-
-  function ChangeAllVariables() {
-    if (PatientReturnParams) {
-      setPatientBFR(PatientReturnParams.BFR);
-      setPatientDFR(PatientReturnParams.DFR);
-      setPatientCaDose(PatientReturnParams.calciumDose);
-      setPatientEffluent(PatientReturnParams.effluent);
-      setPatientACDA(PatientReturnParams.ACDA);
-      setPatientRFR(PatientReturnParams.RFR);
-    }
-  }
-
-  function handleOnClick() {
-    youMayProceed();
-    if (PatientReturnParams) {
-      ChangeAllVariables();
-    }
-  }
-
-  function sendInputError(message: string) {
-    setInputError(message ? `Error: ${message}` : "");
-  }
-
+function ResultCard({ result }: { result: ProtocolResult }) {
   return (
-    <div className="grid grid-flow-row auto-rows-max">
-      <div>
-        <h1>University of Michigan CRRT Flows Check</h1>
-        <h2>This is the brief web application to check your CRRT prescription at University of Michigan</h2>
-      </div>
-
-      <div className="flex justify-center mt-10 items-center ProtocolType">
-        <h3>Select Protocol Type</h3>
-        <Select options={ProtocolSelections} onChange={defineProtocolType} /><br />
-      </div>
-
-      <div className="flex justify-center mt-10 items-center PatientWeight">
-        <h3>Input Patient Weight</h3>
-        <input type="number" placeholder="Patient Weight" onChange={definePatientWeight} /> kg
-      </div>
-
-      <div className="flex justify-center mt-10 items-center PatientAlbumin">
-        <h3>Input Patient Albumin</h3>
-        <input type="number" placeholder="1-5" onChange={definePatientAlbumin} /> g/dL
-      </div>
-
-      <div>
-        <button onClick={handleOnClick}>Submit</button>
-      </div>
-
-      <div className="read-the-docs">
-        <h2>{InputError}</h2>
-        <h2>Results:</h2>
-        <div>
-          BFR: {PatientBFR} <br />
-          ACDA: {PatientACDA} <br />
-          DFR: {PatientDFR} <br />
-          RFR: {PatientRFR} <br />
-          Total Effluent: {PatientEffluent} (BFR + ACDA + DFR + RFR + 100 UF) <br />
-          Calcium Infusion Rate: {PatientCaDose} <br />
-        </div>
-
-        <div className="mt-4">
-          There will be other considerations about HCT, uneven flows and such below.
-        </div>
+    <div className="bg-white p-6 rounded shadow mt-6">
+      <h2 className="text-xl font-bold mb-4">Calculated Protocol</h2>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+        <p className="font-medium">BFR:</p><p>{result.BFR}</p>
+        <p className="font-medium">ACDA:</p><p>{result.ACDA}</p>
+        <p className="font-medium">DFR:</p><p>{result.DFR}</p>
+        <p className="font-medium">RFR:</p><p>{result.RFR}</p>
+        <p className="font-medium">Effluent:</p><p>{result.effluent}</p>
+        <p className="font-medium">Calcium Dose:</p><p>{result.calciumDose}</p>
       </div>
     </div>
   );
-};
+}
 
-export default MainFlowsheet;
+export default function MainFlowsheet() {
+  const [protocolType, setProtocolType] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
+  const [albumin, setAlbumin] = useState<number>(0);
+  const [inputError, setInputError] = useState<string>('');
+  const [warning, setWarning] = useState<string>('');
+  const [result, setResult] = useState<ProtocolResult | null>(null);
+
+  function handleProtocolChange(option: any) {
+    setProtocolType(parseInt(option.value));
+    setResult(null);
+    setWarning('');
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const resultOrWarning = getCalculatedResult(protocolType, weight, albumin);
+    if (typeof resultOrWarning === 'string') {
+      setInputError(resultOrWarning);
+      setResult(null);
+      setWarning('');
+    } else {
+      setInputError('');
+      setResult(resultOrWarning.result);
+      setWarning(resultOrWarning.warning || '');
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <main className="max-w-3xl mx-auto py-8 px-4">
+        <h1 className="text-2xl font-semibold mb-6 text-center">
+          University of Michigan CRRT Flowsheet Calculator
+        </h1>
+
+        <form onSubmit={handleSubmit} className="grid gap-6">
+          <div>
+            <label className="block mb-2 font-medium">Protocol Type</label>
+            <Select options={protocolOptions} onChange={handleProtocolChange} />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">Patient Weight (kg)</label>
+            <input
+              type="number"
+              className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Enter weight in kg"
+              onChange={(e) => setWeight(parseFloat(e.target.value))}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">Patient Albumin (g/dL)</label>
+            <input
+              type="number"
+              className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Enter albumin in g/dL"
+              onChange={(e) => setAlbumin(parseFloat(e.target.value))}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+          >
+            Calculate
+          </button>
+
+          {inputError && (
+            <div className="text-red-600 font-medium text-center">{inputError}</div>
+          )}
+
+          {warning && (
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mt-4 space-y-1">
+              <p className="font-medium">⚠️ Warning</p>
+              {warning.split('. ').map((msg, i) => (
+                <p key={i}>{msg.trim()}{!msg.trim().endsWith('.') ? '.' : ''}</p>
+              ))}
+            </div>
+          )}
+
+          {result && <ResultCard result={result} />}
+        </form>
+      </main>
+    </div>
+  );
+}
