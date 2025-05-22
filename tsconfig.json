@@ -8,7 +8,18 @@
     "module": "CommonJS",
     "sourceMap": true,
     "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": false,
+    "outDir": "./dist"
   }, 
-  "include": ["src/index.d.ts"]
+  "include": [
+    "src/index.d.ts", 
+    "src",
+    "src/vite-env.d.ts"], 
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

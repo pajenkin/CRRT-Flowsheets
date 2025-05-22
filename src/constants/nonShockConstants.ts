@@ -5,7 +5,7 @@ export const effluentStepsNonShock = [
   // Constants for NonShock Table (adjust these values as needed)
 export const NonShockTable = [
     { weight: 50, BFR: 80, ACDA: 200, DFR: 500, RFR: 500 },
-    { weight: 60, BFR: 80, ACDA: 200, DFR: 650, RFR: 540 },
+    { weight: 60, BFR: 80, ACDA: 200, DFR: 650, RFR: 650 },
     { weight: 70, BFR: 100, ACDA: 250, DFR: 800, RFR: 800 },
     { weight: 80, BFR: 100, ACDA: 250, DFR: 950, RFR: 950 },
     { weight: 90, BFR: 150, ACDA: 300, DFR: 1050, RFR: 1050 },
