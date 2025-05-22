@@ -17,27 +17,24 @@ export function getParamsForWeight<T extends { weight: number }>(
       return table.find(row => row.weight === roundedWeight);
     }
   }
-  
-  /**
-   * Finds the index of effluent threshold that matches the given effluent value.
-   */
-  export function findEffluentIndex(effluent: number, effluentSteps: number[]): number {
-    for (let i = 0; i < effluentSteps.length; i++) {
-      if (effluent <= effluentSteps[i]) {
+
+export function findEffluentIndex(effluent: number, thresholds: number[]): number {
+    if (effluent <= thresholds[0]) return 0;
+    for (let i = 1; i < thresholds.length; i++) {
+      if (effluent <= thresholds[i]) {
         return i;
       }
     }
-    return effluentSteps.length - 1;
+    return thresholds.length - 1; // cap to last bin if effluent > all
   }
+
+export function findAlbuminIndex(albumin: number): number {
+    if (albumin <= 0.7) return 0;
   
-  /**
-   * Finds the index of albumin threshold that matches the given albumin value.
-   */
-  export function findAlbuminIndex(albumin: number, albuminThresholds: number[]): number {
-    for (let i = 0; i < albuminThresholds.length; i++) {
-      if (albumin <= albuminThresholds[i]) {
-        return i;
-      }
-    }
-    return albuminThresholds.length - 1;
+    const bin = Math.floor((albumin - 0.8) / 0.5) + 1;
+    return Math.min(bin, 9);
+  }
+
+  export function calculateEffluent(params: { BFR: number; ACDA: number; DFR: number; RFR: number }): number {
+    return params.BFR + params.ACDA + params.DFR + params.RFR + 100;
   }

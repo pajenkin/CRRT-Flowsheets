@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Configurable variables
+KEY_NAME="id_ed25519"
+EMAIL="your_email@example.com"
+
+# Step 1: Clear SSH agent
+echo "🗑 Clearing existing SSH keys from agent..."
+ssh-add -D
+
+# Step 2: Backup old key if exists
+if [ -f ~/.ssh/$KEY_NAME ]; then
+    echo "📦 Backing up existing key to ~/.ssh/${KEY_NAME}.bak"
+    mv ~/.ssh/$KEY_NAME ~/.ssh/${KEY_NAME}.bak
+    mv ~/.ssh/${KEY_NAME}.pub ~/.ssh/${KEY_NAM
