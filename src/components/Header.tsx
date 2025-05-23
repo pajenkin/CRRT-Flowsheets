@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-3">
           <img src={BlockMHex} alt="Logo" className="h-10 w-auto sm:h-12" />
           <Link to="/" className="text-xl font-semibold text-gray-800">
-            CRRT Flowsheets
+            CRRT Calculator
           </Link>
         </div>
 

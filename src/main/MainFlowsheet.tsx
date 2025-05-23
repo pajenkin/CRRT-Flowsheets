@@ -94,9 +94,9 @@ const MainFlowsheet: React.FC = () => {
                 <li>This is for the patients without significant liver metabolism to convert citrate into bicarbonate.</li>
                 <li>If your Hgb is higher than 12 then you may have a post-filter Hct that is higher than 50% which can cause clotting. You can increase the QD and proportionally decrease the QRF to achieve
                 post-filter Hct &lt; =50% while keeping QD+QRF unchanged.</li>
-                <li>Recommend fluid composition: 147 Na, 4K, 35 HCO3-, 1 Phos</li>
+                <li>Recommend fluid comp  osition: 147 Na, 4K, 35 HCO3-, 1 Phos</li>
                 <li>There are special considerations for managing with hyponatremia. Please see *Hyponatremia*</li>
-                <li>Calcium replacement is adjusted for albumin and citrate clearance.</li>
+                <li>Due to the high first pass, it is recommended to replace glucose and vitmains lost on the filter.</li>
               </ul>
             )}
           </div>
