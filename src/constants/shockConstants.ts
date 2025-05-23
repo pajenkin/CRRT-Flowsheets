@@ -10,7 +10,7 @@ export const effluentStepsShock = [
     { weight: 80, BFR: 80, ACDA: 200, DFR: 2000, RFR: 800 },
     { weight: 90, BFR: 90, ACDA: 225, DFR: 2250, RFR: 900 },
     { weight: 100, BFR: 100, ACDA: 250, DFR: 2500, RFR: 1000 },
-    { weight: 110, BFR: 110, ACDA: 375, DFR: 2750, RFR: 1100 },
+    { weight: 110, BFR: 110, ACDA: 275, DFR: 2750, RFR: 1100 },
     { weight: 120, BFR: 120, ACDA: 300, DFR: 3000, RFR: 1200 },
     { weight: 130, BFR: 130, ACDA: 300, DFR: 3250, RFR: 1300 },
     { weight: 140, BFR: 140, ACDA: 300, DFR: 3500, RFR: 1400 },
