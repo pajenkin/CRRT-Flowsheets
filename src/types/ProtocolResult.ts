@@ -5,4 +5,5 @@ export type ProtocolResult = {
     RFR: number;
     effluent: number;
     calciumDose: number;
+    weight: number;
   };

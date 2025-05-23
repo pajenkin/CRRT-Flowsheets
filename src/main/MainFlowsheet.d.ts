@@ -1,1 +1,3 @@
-export default function MainFlowsheet(): import("react/jsx-runtime").JSX.Element;
+import React from 'react';
+declare const MainFlowsheet: React.FC;
+export default MainFlowsheet;

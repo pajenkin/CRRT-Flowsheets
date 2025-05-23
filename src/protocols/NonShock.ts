@@ -29,6 +29,7 @@ export function calculateNonShockProtocol(weight: number, albumin: number): Prot
     ACDA: ptParams.ACDA,
     RFR: ptParams.RFR,
     effluent,
-    calciumDose
+    calciumDose,
+    weight,
   };
 }

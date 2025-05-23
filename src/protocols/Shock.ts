@@ -38,6 +38,7 @@ export function calculateShockProtocol(weight: number, albumin: number): Protoco
       ACDA: ptParams.ACDA,
       RFR: ptParams.RFR,
       effluent,
-      calciumDose
+      calciumDose,
+      weight
     };
   }
