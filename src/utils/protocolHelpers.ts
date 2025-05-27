@@ -16,37 +16,6 @@ type ResultWithWarning = {
   warning?: string;
 };
 
-// export function getCalculatedResult(
-//   protocolType: number,
-//   weight: number,
-//   albumin: number
-// ): ResultWithWarning | string {
-//   if (weight < 5 || weight > 300) {
-//     return 'Double Check!! Weight is typically between 40 and 150 kg';
-//   }
-
-//   if (albumin < 0.5 || albumin > 6.0) {
-//     return 'Double Check!! Albumin is typically between 1.0 and 6.0 g/dL';
-//   }
-
-//   const result =
-//     protocolType === 1
-//       ? calculateNonShockProtocol(weight, albumin)
-//       : calculateShockProtocol(weight, albumin);
-
-//   let warning = '';
-//   if (weight < 20 || weight > 150) {
-//     warning += '⚠️ Weight is outside normal protocol range (20–150 kg). ';
-//   }
-//   if (albumin < 1.0 || albumin > 5.0) {
-//     warning += '⚠️ Albumin is outside normal range (1.0–5.0 g/dL).';
-//   }
-
-//   return warning
-//     ? { result, warning: warning.trim() }
-//     : { result };
-// }
-
 export function getCalculatedResult(
   protocolType: number,
   weight: number,
@@ -71,13 +40,13 @@ export function getCalculatedResult(
 
   let warning = '';
   if (weight < 5 || weight > 300) {
-    warning += 'Double Check!! Weight is typically between 40 and 150 kg. ';
+    warning += '\n Double Check!! Weight is typically between 40 and 150 kg. ';
   } else if (weight < 20 || weight > 150) {
-    warning += '⚠️ Weight is outside normal protocol range (20–150 kg). ';
+    warning += '⚠️ Weight is outside normal protocol range (40–150 kg). ';
   }
 
   if (albumin < 0.5 || albumin > 6.0) {
-    warning += 'Double Check!! Albumin is typically between 1.0 and 6.0 g/dL.';
+    warning += '\n Double Check!! Albumin is typically between 1.0 and 6.0 g/dL.';
   } else if (albumin < 1.0 || albumin > 5.0) {
     warning += '⚠️ Albumin is outside normal range (1.0–5.0 g/dL).';
   }

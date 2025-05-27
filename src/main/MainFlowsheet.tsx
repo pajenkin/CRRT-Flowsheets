@@ -79,9 +79,11 @@ const MainFlowsheet: React.FC = () => {
 
       {result && typeof result === 'string' ? (
         <WarningCard message={result} />
-      ) : result ? (
+      ) : result && typeof result === 'object' ? (
         <>
-          {result.warning && <WarningCard message={result.warning} />}
+          {'warning' in result && result.warning && result.warning.split('\n').map((line, idx) => (
+            <WarningCard key={idx} message={line} />
+          ))}
           <ResultCard result={result.result} />
         </>
       ) : null}
