@@ -11,8 +11,8 @@ const protocolOptions = [
 
 const MainFlowsheet: React.FC = () => {
   const [protocolType, setProtocolType] = useState<number>(1);
-  const [weight, setWeight] = useState<number>(70);
-  const [albumin, setAlbumin] = useState<number>(3.5);
+  const [weight, setWeight] = useState<number>(0);
+  const [albumin, setAlbumin] = useState<number>(0);
   const [collapsed, setCollapsed] = useState(false);
 
   const result = getCalculatedResult(protocolType, weight, albumin);
