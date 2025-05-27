@@ -1,3 +1,5 @@
+// src/main/MainFlowsheet.tsx
+
 import React, { useState } from 'react';
 import ResultCard from '../components/ResultCard';
 import WarningCard from '../components/WarningCard';
@@ -14,8 +16,10 @@ const MainFlowsheet: React.FC = () => {
   const [weight, setWeight] = useState<number>(0);
   const [albumin, setAlbumin] = useState<number>(0);
   const [collapsed, setCollapsed] = useState(false);
+  const [weightTouched, setWeightTouched] = useState(false);
+  const [albuminTouched, setAlbuminTouched] = useState(false);
 
-  const result = getCalculatedResult(protocolType, weight, albumin);
+  const result = weight > 0 && albumin > 0 ? getCalculatedResult(protocolType, weight, albumin) : null;
 
   return (
     <div className="p-4 max-w-3xl mx-auto">
@@ -40,8 +44,16 @@ const MainFlowsheet: React.FC = () => {
               step="1"
               value={weight}
               onChange={(e) => setWeight(parseFloat(e.target.value))}
+              onBlur={() => setWeightTouched(true)}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2"
+              placeholder="Enter weight in kg"
+              autoComplete="off"
             />
+            {weightTouched && weight > 0 && (weight < 1.0 || weight > 300) && (
+              <p className="text-sm text-red-600 mt-1">
+                ⚠️ Weight should be between 1 and 300 kg.
+              </p>
+            )}
           </div>
 
           <div>
@@ -51,20 +63,28 @@ const MainFlowsheet: React.FC = () => {
               step="any"
               value={albumin}
               onChange={(e) => setAlbumin(parseFloat(e.target.value))}
+              onBlur={() => setAlbuminTouched(true)}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2"
+              placeholder="Enter albumin in g/dL"
+              autoComplete="off"
             />
+            {albuminTouched && albumin > 0 && (albumin < 1.0 || albumin > 5.0) && (
+              <p className="text-sm text-red-600 mt-1">
+                ⚠️ Albumin is outside normal range (1.0–5.0 g/dL).
+              </p>
+            )}
           </div>
         </div>
       </div>
 
-      {typeof result === 'string' ? (
+      {result && typeof result === 'string' ? (
         <WarningCard message={result} />
-      ) : (
+      ) : result ? (
         <>
           {result.warning && <WarningCard message={result.warning} />}
           <ResultCard result={result.result} />
         </>
-      )}
+      ) : null}
 
       <div className="bg-white shadow-md rounded-2xl p-6 mt-8">
         <button
@@ -79,7 +99,6 @@ const MainFlowsheet: React.FC = () => {
             <h2 className="text-lg font-semibold text-blue-800 mb-2">
               {protocolType === 1 ? 'Non-Shock Protocol Info' : 'Shock-Liver Protocol Info'}
             </h2>
-            {/* This is the non-shock considerations */}
             {protocolType === 1 ? (
               <ul className="list-disc pl-5 space-y-1">
                 <li>This protocol is used for any patient who can metabolize citrate (without shock liver or concern for cardiac induced hepatic congestion).</li>
@@ -88,15 +107,13 @@ const MainFlowsheet: React.FC = () => {
                 <li>Calcium replacement is adjusted for albumin and citrate clearance.</li>
               </ul>
             ) : (
-              // This is for the shock-liver protocol
               <ul className="list-disc pl-5 space-y-1">
                 <li>This protocol uses a higher effluent dose to have higher first pass citrate removal</li>
                 <li>This is for the patients without significant liver metabolism to convert citrate into bicarbonate.</li>
-                <li>If your Hgb is higher than 12 then you may have a post-filter Hct that is higher than 50% which can cause clotting. You can increase the QD and proportionally decrease the QRF to achieve
-                post-filter Hct &lt; =50% while keeping QD+QRF unchanged.</li>
-                <li>Recommend fluid comp  osition: 147 Na, 4K, 35 HCO3-, 1 Phos</li>
+                <li>If your Hgb is higher than 12 then you may have a post-filter Hct that is higher than 50% which can cause clotting. You can increase the QD and proportionally decrease the QRF to achieve post-filter Hct &lt;=50% while keeping QD+QRF unchanged.</li>
+                <li>Recommend fluid composition: 147 Na, 4K, 35 HCO3-, 1 Phos</li>
                 <li>There are special considerations for managing with hyponatremia. Please see *Hyponatremia*</li>
-                <li>Due to the high first pass, it is recommended to replace glucose and vitmains lost on the filter.</li>
+                <li>Due to the high first pass, it is recommended to replace glucose and vitamins lost on the filter.</li>
               </ul>
             )}
           </div>
