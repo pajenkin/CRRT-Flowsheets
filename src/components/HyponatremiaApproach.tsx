@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { BlockMath } from "react-katex";
+import { D5WCalculator } from "../components/D5WCalculator";
 
 export const HyponatremiaApproach = () => {
   const [d5wOpen, setD5wOpen] = useState(false);
   const [acdaOpen, setAcdaOpen] = useState(false);
   const [acdaPreciseOpen, setAcdaPreciseOpen] = useState(false);
+  const [d5wCalcOpen, setD5wCalcOpen] = useState(true);
 
   return (
     <section className="mt-10 space-y-10">
@@ -13,8 +15,8 @@ export const HyponatremiaApproach = () => {
         <h2 className="text-center text-xl font-semibold mb-2">Approach and Assumptions</h2>
         <div className="text-gray-700 space-y-4 text-left">
           <p>
-            <strong>Our most common approach</strong> to managing hyponatremia during CRRT is the administration of
-            <strong> hypotonic intravenous fluids</strong> (e.g., D5W) alongside standard CRRT. This method is simple,
+            Our most common approach to managing hyponatremia during CRRT is the administration of
+             hypotonic intravenous fluids (e.g., D5W) alongside standard CRRT. This method is simple,
             effective, and avoids the need to modify dialysate or replacement fluid composition. The method could be adopted 
             for both postdilution CVVH and CVVHDF or counter- current CVVHD using standard CRRT fluids.
           </p>
@@ -30,14 +32,31 @@ export const HyponatremiaApproach = () => {
           </ul>
         </div>
       </div>
+      {/* Calculator for D5W with ACDA */}
+      <div>
+        <button
+            className="flex items-center justify-between w-full text-left text-xl font-semibold mb-2 focus:outline-none"
+            onClick={() => setD5wCalcOpen(!d5wCalcOpen)}
+        >
+            <span>D5W Infusion Calculator (with Approximated ACD-A)</span>
+            <span className="text-sm">{d5wCalcOpen ? "▲" : "▼"}</span>
+        </button>
 
+        {d5wCalcOpen && (
+            <div className="border rounded-md p-4 text-gray-700 space-y-4">
+            <D5WCalculator />
+            </div>
+        )}
+        </div>
+        <p>More equations below:</p>
+        <hr className="my-8 border-t-2 border-gray-300" />
       {/* D5W Infusion Rate (Without ACD-A) */}
       <div>
         <button
           className="flex items-center justify-between w-full text-left text-xl font-semibold mb-2 focus:outline-none"
           onClick={() => setD5wOpen(!d5wOpen)}
         >
-          <span>D5W Infusion Rate (Without ACD-A)</span>
+          <span>Equation: D5W Infusion Rate (Without ACD-A)</span>
           <span className="text-sm">{d5wOpen ? "▲" : "▼"}</span>
         </button>
 
@@ -75,7 +94,7 @@ export const HyponatremiaApproach = () => {
           className="flex items-center justify-between w-full text-left text-xl font-semibold mb-2 focus:outline-none"
           onClick={() => setAcdaPreciseOpen(!acdaPreciseOpen)}
         >
-          <span>D5W to Mitigate ACD-A Sodium Gain</span>
+          <span>Equation: D5W to Mitigate ACD-A Sodium Gain</span>
           <span className="text-sm">{acdaPreciseOpen ? "▲" : "▼"}</span>
         </button>
 
@@ -112,7 +131,7 @@ export const HyponatremiaApproach = () => {
           className="flex items-center justify-between w-full text-left text-xl font-semibold mb-2 focus:outline-none"
           onClick={() => setAcdaOpen(!acdaOpen)}
         >
-          <span>D5W with Approximated ACD-A</span>
+          <span>Equation: D5W with Approximated ACD-A</span>
           <span className="text-sm">{acdaOpen ? "▲" : "▼"}</span>
         </button>
 
@@ -133,6 +152,7 @@ export const HyponatremiaApproach = () => {
           </div>
         )}
       </div>
+
     </section>
   );
 };
