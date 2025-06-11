@@ -50,6 +50,35 @@ export const HyponatremiaApproach = () => {
         </div>
         <p>More equations below:</p>
         <hr className="my-8 border-t-2 border-gray-300" />
+      
+            {/* D5W with Approximated ACD-A */}
+            <div>
+        <button
+          className="flex items-center justify-between w-full text-left text-xl font-semibold mb-2 focus:outline-none"
+          onClick={() => setAcdaOpen(!acdaOpen)}
+        >
+          <span>Equation used in Calculator: D5W with Approximated ACD-A</span>
+          <span className="text-sm">{acdaOpen ? "▲" : "▼"}</span>
+        </button>
+
+        {acdaOpen && (
+          <div className="border rounded-md p-4 text-gray-700 space-y-4">
+            <BlockMath
+              math={`
+                \\text{D5W Rate (mL/hr)} = 0.9 \\times \\left( \\frac{[\\text{CRRT Na}] - [\\text{Target Na}]}{[\\text{Target Na}]} \\right) \\times (Q_D + Q_{RF})
+              `}
+            />
+            <h3 className="text-md font-semibold">Variable Definitions:</h3>
+            <ul className="list-disc pl-5 text-left text-sm space-y-1">
+              <li><strong>CRRT [Na⁺]</strong>: Sodium concentration of CRRT fluid (mmol/L)</li>
+              <li><strong>Target [Na⁺]</strong>: Desired serum sodium level (mmol/L)</li>
+              <li><strong>Q<sub>D</sub></strong>: Dialysate flow rate (mL/hr)</li>
+              <li><strong>Q<sub>RF</sub></strong>: Replacement fluid flow rate (mL/hr)</li>
+            </ul>
+          </div>
+        )}
+      </div>
+      
       {/* D5W Infusion Rate (Without ACD-A) */}
       <div>
         <button
@@ -120,34 +149,6 @@ export const HyponatremiaApproach = () => {
               <li><strong>Q<sub>Eff</sub></strong>: Effluent flow rate</li>
               <li><strong>Q<sub>Be</sub></strong>: Net buffer (bicarbonate + citrate) delivery rate</li>
               <li><strong>Serum Target [Na⁺]</strong>: Desired serum sodium level</li>
-            </ul>
-          </div>
-        )}
-      </div>
-
-      {/* D5W with Approximated ACD-A */}
-      <div>
-        <button
-          className="flex items-center justify-between w-full text-left text-xl font-semibold mb-2 focus:outline-none"
-          onClick={() => setAcdaOpen(!acdaOpen)}
-        >
-          <span>Equation: D5W with Approximated ACD-A</span>
-          <span className="text-sm">{acdaOpen ? "▲" : "▼"}</span>
-        </button>
-
-        {acdaOpen && (
-          <div className="border rounded-md p-4 text-gray-700 space-y-4">
-            <BlockMath
-              math={`
-                \\text{D5W Rate (mL/hr)} = 0.9 \\times \\left( \\frac{[\\text{CRRT Na}] - [\\text{Target Na}]}{[\\text{Target Na}]} \\right) \\times (Q_D + Q_{RF})
-              `}
-            />
-            <h3 className="text-md font-semibold">Variable Definitions:</h3>
-            <ul className="list-disc pl-5 text-left text-sm space-y-1">
-              <li><strong>CRRT [Na⁺]</strong>: Sodium concentration of CRRT fluid (mmol/L)</li>
-              <li><strong>Target [Na⁺]</strong>: Desired serum sodium level (mmol/L)</li>
-              <li><strong>Q<sub>D</sub></strong>: Dialysate flow rate (mL/hr)</li>
-              <li><strong>Q<sub>RF</sub></strong>: Replacement fluid flow rate (mL/hr)</li>
             </ul>
           </div>
         )}
