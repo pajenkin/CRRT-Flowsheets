@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const D5WCalculator = () => {
-  const [crrtNa, setCrrtNa] = useState(140);
+  const [crrtNa, setCrrtNa] = useState(147);
   const [targetNa, setTargetNa] = useState(120);
   const [qd, setQd] = useState(2000);
   const [qrf, setQrf] = useState(2000);

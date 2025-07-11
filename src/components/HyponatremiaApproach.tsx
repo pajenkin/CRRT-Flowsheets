@@ -62,12 +62,14 @@ export const HyponatremiaApproach = () => {
         </button>
         {acdaOpen && (
           <div className="border rounded-md p-4 text-gray-700 space-y-4">
-            <div className="w-full text-[clamp(0.8rem,1.5vw,1.1rem)] leading-tight">
-              <BlockMath
-                math={`
-                  \\text{D5W Rate (mL/hr)} = 0.9 \\times \\left( \\frac{[\\text{CRRT Na}] - [\\text{Target Na}]}{[\\text{Target Na}]} \\right) \\times (Q_D + Q_{RF})
-                `}
-              />
+            <div className="w-full flex justify-center overflow-hidden">
+              <div className="inline-block transform scale-[0.60] origin-center whitespace-nowrap">
+                <BlockMath
+                  math={`
+                    \\text{D5W Rate (mL/hr)} = 0.9 \\times \\left( \\frac{[\\text{CRRT Na}] - [\\text{Target Na}]}{[\\text{Target Na}]} \\right) \\times (Q_D + Q_{RF})
+                  `}
+                />
+              </div>
             </div>
             <h3 className="text-md font-semibold">Variable Definitions:</h3>
             <ul className="list-disc pl-5 text-sm space-y-1">
@@ -95,14 +97,16 @@ export const HyponatremiaApproach = () => {
               When administering D5W during CRRT without citrate anticoagulation (ACD-A), use the following equation
               to calculate the infusion rate that achieves a targeted sodium correction:
             </p>
-            <div className="w-full bg-white rounded p-4 text-[clamp(0.8rem,1.5vw,1.1rem)]">
-              <BlockMath
-                math={`
-                  \\text{D5W Rate (mL/hr)} = 
-                  \\left( \\frac{[Na^+]_{\\text{CRRT}} - [Na^+]_{\\text{serum target}}}{[Na^+]_{\\text{serum target}}} \\right)
-                  \\times (Q_{D} + Q_{RF})
-                `}
-              />
+            <div className="w-full flex justify-center overflow-hidden">
+              <div className="inline-block transform scale-[0.60] origin-center whitespace-nowrap">
+                <BlockMath
+                  math={`
+                    \\text{D5W Rate (mL/hr)} = 
+                    \\left( \\frac{[Na^+]_{\\text{CRRT}} - [Na^+]_{\\text{serum target}}}{[Na^+]_{\\text{serum target}}} \\right)
+                    \\times (Q_{D} + Q_{RF})
+                  `}
+                />
+              </div>
             </div>
             <h3 className="text-md font-semibold">Variable Definitions:</h3>
             <ul className="list-disc pl-5 text-sm space-y-1">
@@ -126,9 +130,10 @@ export const HyponatremiaApproach = () => {
         </button>
         {acdaPreciseOpen && (
           <div className="border rounded-md p-4 text-gray-700 space-y-4">
-            <div className="w-full text-[clamp(0.8rem,1.5vw,1.1rem)] leading-tight">
-              <BlockMath
-                math={`
+            <div className="w-full flex justify-center overflow-hidden">
+              <div className="inline-block transform scale-[0.60] origin-center whitespace-nowrap">
+                <BlockMath
+                  math={`
                   \\text{D5W Rate} =
                   \\frac{
                     Q_{\\text{Cit}} \\times \\left( \\text{Citrate}[\\text{Na}^+] - \\text{CRRT}[\\text{Na}^+] \\right)
@@ -136,8 +141,9 @@ export const HyponatremiaApproach = () => {
                   }{
                     \\text{Serum Target}[\\text{Na}^+]
                   }
-                `}
-              />
+                  `}
+                />
+              </div>
             </div>
             <h3 className="text-md font-semibold">Variable Definitions:</h3>
             <ul className="list-disc pl-5 text-sm space-y-1">
